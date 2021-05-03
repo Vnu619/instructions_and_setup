@@ -1,0 +1,8 @@
+sick lidar connection
+1.) connect the lidar to ethernet port and power it up with brown(positive) and blue(ground) terminals.
+2.) set ip address using sopas tool in windows(example 172.27.6.27)
+3.) In ubuntu edit connections in wired connections with device address of ethernet port( example 48:B0:2D:18:55:91).
+4.) go to ipv4 settings and add manual method
+5.) add address(example 172.27.6.1) any address other than ip address of lidar, netmask(255.255.255.0) and save
+6.) launch the file
+

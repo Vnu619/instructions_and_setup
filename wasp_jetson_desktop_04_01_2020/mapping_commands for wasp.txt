@@ -1,0 +1,22 @@
+mapping_wasp
+3 terminals
+wasp_ws ---> 2 terminals
+terminal1
+source devel/setup.bash
+roslaunch sick_tim sick_tim571_2050101.launch 
+
+terminal 2
+source devel/setup.bash
+roslaunch robot_localization mapping_sens_fuse.launch 
+
+terminal 3 cartographer_ws
+source devel_isolated/setup.bash
+roslaunch cartographer_ros my_robot.launch 
+
+terminal 4
+rviz
+
+terminal 5
+rosrun map_server map_saver -f map_name
+
+

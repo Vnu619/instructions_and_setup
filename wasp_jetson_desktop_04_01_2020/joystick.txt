@@ -1,0 +1,23 @@
+----->Installation of ps4 bluetooth driver<----
+sudo pip install ds4drv
+
+
+---->Installation of joy_node<-----
+sudo apt-get install ros-melodic-joy
+
+
+------>RUNNING THE TELEOP CONTROL<--------
+
+----->joystick launch<-------
+In wasp_ws 3 terminals
+source /devel/setup.bash
+roscore
+sudo ds4drv
+----turn on joystick and wait for joystick to pair-----
+rosrun joy joy_node
+rosrun learning_joy turtle_teleop_joy 
+
+---->Turning On Robot in TELEOP MODE<------
+roslaunch command_rqt wasp_controller_individual.launch 
+
+

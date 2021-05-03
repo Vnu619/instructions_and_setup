@@ -1,0 +1,56 @@
+Installing Openpose for python 2.7
+
+1.) ----> install cmake version above 3.12<-----
+sudo apt-get install libssl-dev libcurl4-openssl-dev
+sudo apt-get remove cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0.tar.gz
+tar -xvzf cmake-3.18.0.tar.gz
+cd cmake-3.18.0
+sudo nvpmodel -m 2
+./bootstrap
+make -j6
+sudo make install
+
+2.)-----> install openpose for python2.7 <--------
+git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
+cd openpose
+sudo bash ./scripts/ubuntu/install_deps.sh
+mkdir build
+cd build
+
+3.)--->Important steps for building in python 2.7 <-----
+
+sudo cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
+-D CUDA_HOST_COMPILER=/usr/bin/cc \
+-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+-D CUDA_USE_STATIC_CUDA_RUNTIME=ON \
+-D CUDA_rt_LIBRARY=/usr/lib/aarch64-linux-gnu/librt.so \
+-D CUDA_ARCH_BIN=7.2 \
+-D GPU_MODE=CUDA \
+-D DOWNLOAD_FACE_MODEL=ON \
+-D DOWNLOAD_COCO_MODEL=ON \
+-D USE_OPENCV=ON \
+-D BUILD_PYTHON=ON \
+-D PYTHON_EXECUTABLE=/usr/bin/python2.7 \
+-D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
+-D BUILD_EXAMPLES=ON \
+-D BUILD_DOCS=OFF \
+-D DOWNLOAD_HAND_MODEL=ON ..
+
+
+sudo sed -i -e 's/cudnn.h/cudnn_version.h/g' ../3rdparty/caffe/cmake/Cuda.cmake
+sudo make -j6
+sudo make install
+
+cd python
+make -j6
+
+sudo cp -r ~/src/openpose/build/python/openpose/ /usr/lib/python2.7/dist-packages
+
+4.) Add python path in bashrc
+export PYTHONPATH=/usr/local/python/:$PYTHONPATH
+
+for python3.6 version
+follow
+https://spyjetson.blogspot.com/2020/07/jetson-xavier-nx-human-pose-estimation.html?m=1
+
