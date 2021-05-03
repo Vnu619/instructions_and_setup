@@ -1,0 +1,12 @@
+   18  sudo apt update
+   19  sudo apt install dkms git
+   20  sudo apt install build-essential libelf-dev linux-headers-$(uname -r)
+   21  sudo apt install build-essential libelf-dev
+   22  git clone https://github.com/aircrack-ng/rtl8812au.git
+   23  cd rtl8812au/
+   24  ls
+   25  make
+   26  make -j8
+   27  sudo make install 
+   28  sudo ldconfig -v
+   29  sudo reboot
